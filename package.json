@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AnvarovY/tasks1.git"
+    "url": "git+https://github.com/AnvarovY/tasks.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AnvarovY/tasks1/issues"
+    "url": "https://github.com/AnvarovY/tasks/issues"
   },
-  "homepage": "https://github.com/AnvarovY/tasks1#readme",
+  "homepage": "https://github.com/AnvarovY/tasks#readme",
   "dependencies": {
     "@types/node": "^13.13.5",
     "readline-sync": "^1.4.10"
