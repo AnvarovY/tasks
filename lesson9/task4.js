@@ -6,6 +6,6 @@ let i = 1;
 for (let task of todos) {
     if (task.completed) {
       console.log(i + '.' + ' ' + task.title);
-      ++i;
     }
+    ++i;
   }
