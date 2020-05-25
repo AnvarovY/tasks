@@ -19,11 +19,11 @@ todos.sort(function(a, b) {
         return 1;
     }
     return 0;
-   });
+});
 
-   fs.writeFileSync("todos.json", JSON.stringify(todos));
+fs.writeFileSync("todos.json", JSON.stringify(todos));
 
-   for (let task of todos) {
+for (let task of todos) {
     let done;
     if (task.completed) {
       done = '[x]';
@@ -32,4 +32,4 @@ todos.sort(function(a, b) {
     }
     console.log(done + ' ' + i + '.' + ' ' + task.title);
     ++i;
-  }
+}
