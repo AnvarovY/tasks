@@ -11,5 +11,5 @@ if (remove >= 0 && remove < todos.length) {
     fs.writeFileSync("todos.json", JSON.stringify(todos));
     console.log('done!');
 } else {
-    console.log('wrong number')
+    console.log('wrong number');
 }

@@ -22,5 +22,5 @@ if (toggle >= 0 && toggle < todos.length) {
     fs.writeFileSync("todos.json", JSON.stringify(todos));
     console.log(done + ' ' + toggle + '.' + ' ' + todos[toggle].title);
 } else {
-    console.log('wrong number')
+  console.log('wrong number');
 }
