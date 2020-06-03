@@ -136,6 +136,8 @@ function sortTodos() {
     listTodos("all");
 }
 
+initTodos();
+
 while (true) {
     let str = readlineSync.question("> ");
     let words = str.split(" ");
