@@ -42,11 +42,10 @@ function renderTodo(num, todo, highlight) {
 
 function listTodos(type) {
     let todos = loadTodos();
-    for (let todo of todos) {
-        let num = 1;
-        if (type === "all" || (type === "completed" && todos.completed) || (type === "uncompleted" && !todos.completed)) {
-            console.log(renderTodo(num, todo));
-            ++num;
+    for (let i = 0; i < todos.length; ++i) {
+        let todo = todos[i];
+        if (type === "all" || (type === "completed" && todo.completed) || (type === "uncompleted" && !todo.completed)) {
+            console.log(renderTodo((i + 1), todo));
         }
     }
 }
@@ -64,7 +63,7 @@ function addTodo(title1) {
 
 function toggleTodo(num) {
     let todos = loadTodos();
-    num = parseInt(num);
+    num = parseInt(num) - 1;
     let todo = todos[num];
     if (num >= 0 && num < todos.length) {
         if (todo.completed) {
@@ -82,7 +81,7 @@ function toggleTodo(num) {
 
 function removeTodo(num) {
     let todos = loadTodos();
-    num = parseInt(num);
+    num = parseInt(num) -1;
     if (num >= 0 && num < todos.length) {
         todos.splice(num, 1);
         saveTodos(todos);
@@ -104,7 +103,7 @@ function clearTodos() {
     console.log(todos.length - newTodos.length + ' todos removed');
 }
 
-function searchTodos(str) {
+function searchTodos(search) {
     let todos = loadTodos();
     let index;
 
@@ -131,8 +130,42 @@ function sortTodos() {
     todos.sort(function(a, b) {
         let titleA=a.title.toLowerCase();
         let titleB=b.title.toLowerCase();
-        return Number(a.completed) - Number(b.completed) || titleA.localeCompare(titleB);
+        return parseInt(a.completed) - parseInt(b.completed) || titleA.localeCompare(titleB);
     });
     saveTodos(todos);
     listTodos("all");
 }
+
+while (true) {
+    let str = readlineSync.question("> ");
+    let words = str.split(" ");
+    let command = words[0];
+  
+    if (command === "list") {
+        listTodos("uncompleted");
+    } else if (command === "list-all") {
+        listTodos("all");
+    } else if (command === "list-completed") {
+        listTodos("completed");
+    } else if (command === "add") {
+        let title = words.slice(1).join(" ");
+        addTodo(title);
+    } else if (command === "toggle") {
+        let num = parseInt(words[1]);
+        toggleTodo(num);
+    } else if (command === "remove") {
+        let num = parseInt(words[1]);
+        removeTodo(num);
+    } else if (command === "clear") {
+        clearTodos();
+    } else if (command === "search") {
+        let x = (words[1]);
+        searchTodos(x);
+    } else if (command === "sort") {
+        sortTodos();
+    } else if (command === "exit") {
+        break;
+    } else {
+        console.log("wrong command");
+    }
+  }
