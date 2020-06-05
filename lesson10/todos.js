@@ -37,7 +37,13 @@ function renderTodo(num, todo, highlight) {
     } else {
         done = '[ ]';
     }
-    return (done + ' ' + num + '.' + ' ' + todo.title);
+    if (highlight) {
+    return (
+      done + ' ' + num + '. '  + todo.title.slice(0, highlight[0]) + chalk.red(todo.title.substr(highlight[0], highlight[1].length)) +todo.title.slice(highlight[0] + highlight[1].length)
+      );
+    } else {
+      return (done + ' ' + num + '. ' + todo.title);
+    } 
 }
 
 function listTodos(type) {
@@ -105,20 +111,12 @@ function clearTodos() {
 
 function searchTodos(search) {
     let todos = loadTodos();
-    let index;
 
     for (let i = 0; i < todos.length; ++i) {
         if (todos[i].title.toLowerCase().includes(search.toLowerCase())) {
-            index = todos[i].title.toLowerCase().indexOf(search.toLowerCase());
-            let done;
-            if (todos[i].completed) {
-            done = '[x]';
-            } else {
-            done = '[ ]';
-            }
-            console.log(
-            done + ' ' + (i + 1) + '. ' + todos[i].title.slice(0, index) + chalk.red(todos[i].title.substr(index, search.length)) + todos[i].title.slice(index + search.length)
-            );
+            let index = todos[i].title.toLowerCase().indexOf(search.toLowerCase());
+            let highlight = [index, search];
+            console.log(renderTodo((i + 1), todos[i], highlight));
         }
     }
 }
