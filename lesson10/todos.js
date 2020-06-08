@@ -38,8 +38,9 @@ function renderTodo(num, todo, highlight) {
         done = '[ ]';
     }
     if (highlight) {
-    return (
-      done + ' ' + num + '. '  + todo.title.slice(0, highlight[0]) + chalk.red(todo.title.substr(highlight[0], highlight[1].length)) +todo.title.slice(highlight[0] + highlight[1].length)
+        let index = todo.title.toLowerCase().indexOf(highlight.toLowerCase());
+        return (
+      done + ' ' + num + '. '  + todo.title.slice(0, index) + chalk.red(todo.title.substr(index, highlight.length)) +todo.title.slice(index + highlight.length)
       );
     } else {
       return (done + ' ' + num + '. ' + todo.title);
@@ -114,8 +115,7 @@ function searchTodos(search) {
 
     for (let i = 0; i < todos.length; ++i) {
         if (todos[i].title.toLowerCase().includes(search.toLowerCase())) {
-            let index = todos[i].title.toLowerCase().indexOf(search.toLowerCase());
-            let highlight = [index, search];
+            let highlight = search;
             console.log(renderTodo((i + 1), todos[i], highlight));
         }
     }
