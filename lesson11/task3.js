@@ -33,8 +33,13 @@ function initTodos() {
 function renderTodo(num, todo, highlight) {
     let done = (todo.completed) ? '[x]' : '[ ]';
     if (highlight) {
+        let regexp = new RegExp(highlight, 'gi');
+        function replacer(match) {
+            return chalk.red(match);
+        }
+        let find = todo.title.replace(regexp, replacer);
         return (
-            done + ' ' + num + '. ' + highlight);
+            done + ' ' + num + '. ' + find);
     } else {
         return (done + ' ' + num + '. ' + todo.title);
     }
@@ -106,11 +111,6 @@ function clearTodos() {
 
 function searchTodos(search) {
     let todos = loadTodos();
-    let regexp = new RegExp(`${search}`, 'gi');
-    function replacer(match) {
-        return chalk.red(match);
-    }
-
     todos
         .map((item, index) => ({
             todo: item,
@@ -118,9 +118,8 @@ function searchTodos(search) {
         }))
         .filter((x) => x.todo.title.toLowerCase().includes(search.toLowerCase()))
         .forEach(function (item) {
-            let find = item.todo.title.replace(regexp, replacer);
-            console.log(renderTodo(item.index + 1, item.todo, find));
-        })
+            console.log(renderTodo(item.index + 1, item.todo, search));
+        });
 }
 
 function sortTodos() {

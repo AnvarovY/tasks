@@ -17,7 +17,7 @@ console.log('(№7-2) \n Сумма всех элементов массива =
 // задание 7-3
 let c = [3, 7, 12, 8, -5, -10];
 
-console.log('(№7-3) \n Сумма четных элементов массива = ' + _.sum(c.filter(x => x % 2 === 0)) + '\n');
+console.log('(№7-3) \n Сумма четных элементов массива = ' + _.sum(c.filter((x, index) => index % 2 === 0)) + '\n');
 
 // задание 7-4
 let g = [3, 7, 12, 8, -5, -10];
@@ -49,7 +49,6 @@ console.log('(№7-7) \n Замена max и min местами - ' + l + '\n');
 
 // задание 7-8
 let y = [5, 5, 7, 8, 0, 0, 1, 5];
-let u = [];
-u = y.filter((element, index) => y.indexOf(element) === index);
+let u = _.uniq(y);
 
 console.log('(№7-8) \n Массив без повторов - ' + u);
